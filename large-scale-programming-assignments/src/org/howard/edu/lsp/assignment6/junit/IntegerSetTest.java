@@ -6,8 +6,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
-
-import org.howard.edu.lsp.assignment6.integerset.IntegerSet;
+import org.howard.edu.lsp.assignment5.implementation.IntegerSet;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -29,7 +28,7 @@ public class IntegerSetTest {
 		set1.addItem(1);
 		set1.addItem(2);
 		
-		Integer Set set2 = new Integer Set();
+		IntegerSet set2 = new IntegerSet();
 		set2.add(3);
 		
 		set1.union(set2);
@@ -37,10 +36,25 @@ public class IntegerSetTest {
 		System.out.println(set1.toString());
 		assertEquals("[1, 2, 3]", set1.toString());
 		assertNotEquals("[3, 2, 1]", set1.toString());
+	}
+	
+	@Test
+	@DisplayName("IntegerSet.union throws exception");
+	public void testUnion_THROWS_EXCEPTION() {
+		IntegerSet set1 = new IntegerSet();
+		IntegerSet set2 = new IntegerSet();
 		
+		Exception exception = assertThrows(RuntimeException.class, () -> {
+			set1.union(set2);
+	});
 		
+	String expectedMessage = "Empty set in union";
+	String actualMessage = exception.getMessage();
+	
+	assertTrue(actualMessage.contains(expectedMessage));
+	}
 		
 		
 	}
 
-}
+
